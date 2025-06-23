@@ -1,16 +1,21 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'Java17'
+    }
+
     stages {
         stage('Build') {
             steps {
-                sh 'mkdir -p out'
-                sh 'javac -d out src/com/chaitanya/passwordgen/*.java'
+                bat 'mkdir out'
+                bat 'javac -d out src\\com\\chaitanya\\passwordgen\\*.java'
             }
         }
+
         stage('Run') {
             steps {
-                sh 'java -cp out com.chaitanya.passwordgen.Main'
+                bat 'java -cp out com.chaitanya.passwordgen.Main'
             }
         }
     }
