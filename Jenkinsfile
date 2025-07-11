@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mkdir out'
+                bat 'if not exist out mkdir out'
                 bat 'javac -d out src\\com\\chaitanya\\passwordgen\\*.java'
             }
         }
