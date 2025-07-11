@@ -1,25 +1,23 @@
 package com.chaitanya.passwordgen;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        if (args.length < 5) {
+            System.out.println("Usage: java Main <useUpper:yes/no> <useLower:yes/no> <useNumbers:yes/no> <useSymbols:yes/no> <length:int>");
+        }
 
-        System.out.println("Include uppercase letters? (yes/no)");
-        boolean useUpper = scanner.nextLine().equalsIgnoreCase("yes");
+        boolean useUpper = args[0].equalsIgnoreCase("yes");
+        boolean useLower = args[1].equalsIgnoreCase("yes");
+        boolean useNumbers = args[2].equalsIgnoreCase("yes");
+        boolean useSymbols = args[3].equalsIgnoreCase("yes");
+        int length;
 
-        System.out.println("Include lowercase letters? (yes/no)");
-        boolean useLower = scanner.nextLine().equalsIgnoreCase("yes");
-
-        System.out.println("Include numbers? (yes/no)");
-        boolean useNumbers = scanner.nextLine().equalsIgnoreCase("yes");
-
-        System.out.println("Include symbols? (yes/no)");
-        boolean useSymbols = scanner.nextLine().equalsIgnoreCase("yes");
-
-        System.out.println("Enter desired password length:");
-        int length = scanner.nextInt();
+        try {
+            length = Integer.parseInt(args[4]);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid password length: " + args[4]);
+            return;
+        }
 
         String alphabet = Alphabet.getAlphabet(useUpper, useLower, useNumbers, useSymbols);
         if (alphabet.isEmpty()) {
